@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Product;
 use App\Models\Order;
+use App\Mail\OrderMail;
 
 class OrderController extends Controller
 {
@@ -63,6 +65,13 @@ class OrderController extends Controller
         $order->save();
 
         $order->products()->sync($order_products);
+
+        $details = [
+            'order_id' => $order->id,
+            'order_amount' => $order_amount
+        ];
+
+        Mail::to(auth()->user()->email)->send( new OrderMail($details));
 
         return redirect()->route('order.index')->with('success', 'Order created successfully');
     }
