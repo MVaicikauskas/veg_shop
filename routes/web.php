@@ -4,6 +4,7 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -52,5 +53,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::controller(UserController::class)->group(function(){
         Route::get('/user', 'index')->name('user.index');
         Route::delete('order/{order}/delete', 'destroy')->name('user.delete');
+    });
+
+    Route::controller(ImageUploadController::class)->group(function(){
+        Route::get('/image', 'index')->name('image.index');
+        Route::post('/image/upload', 'upload')->name('image.upload');
     });
 });

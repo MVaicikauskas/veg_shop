@@ -45,6 +45,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('order.index') }}">{{ __('My Orders') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('image.index') }}">{{ __('Image Upload') }}</a>
+                        </li>
                         @endauth
                     </ul>
 
